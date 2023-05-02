@@ -3,22 +3,10 @@ import { handleErrors } from './handleErrors';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import { v4 as uuid } from 'uuid';
-import { defineStore } from 'pinia'
 
 const prisma = new PrismaClient();
 const router = express.Router();
 
-/*
-export const useSession = defineStore('session',  {
-    state: () => ({
-        sessionId: []
-    }),
-    getters: {
-        productCount(state) {
-
-        }
-    }
-});*/
 
 router.post(
     '/',
@@ -42,27 +30,13 @@ router.post(
             return res.status(401).send({ error: 'Invalid email or password' });
         }
 
-/*
-        const store = useStore();
-        const token = store.token;
-*/
+
         // Create a new session for the user
         const session = await prisma.session.create({
-            //data: { userid: user.id, id: uuid(), token: token }
 
              data: { userid: user.id, id: uuid() }
         });
 
-        /*export const useSession =  {
-            state: () => ({
-                sessionId: [session.id]
-            }),
-            getters: {
-                productCount(state) {
-                    return state.products.length
-                }
-            }
-        }*/
 
         return res.status(201).send({ sessionId: session.id });
     })

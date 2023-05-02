@@ -4,14 +4,14 @@ import {createRouter, createWebHistory} from 'vue-router';
 // @ts-ignore
 import SignUp from '../views/SignUp.vue';
 import SignIn from '../views/SignIn.vue';
-import Notes from '../views/Notes.vue';
+import Tasks from '../views/Tasks.vue';
 
 const routes = [
 
     {
         path: '/',
-        name: 'Notes',
-        component: Notes,
+        name: 'Tasks',
+        component: Tasks,
     },
     {
         path: '/signup',

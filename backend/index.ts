@@ -5,13 +5,16 @@ import {Error} from './types';
 import * as dotenv from 'dotenv';
 import usersRoutes from "./routes/usersRoutes";
 import sessionsRoutes from "./routes/sessionsRoutes";
+import tasksRoutes from "./routes/tasksRoutes";
 import cors from 'cors';
-import { createPinia } from "pinia";
+import expressWs from 'express-ws';
 
 dotenv.config();
 const port: Number = Number(process.env.PORT) || 3000;
 const app: Express = express();
 const swaggerDocument: Object = YAML.load('./swagger.yaml');
+const { app: appWithWs, getWss } = expressWs(app);
+
 
 // Middleware
 app.use(express.json());
@@ -29,6 +32,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 app.use('/users', usersRoutes);
 app.use('/sessions', sessionsRoutes);
+app.use('/tasks', tasksRoutes);
 
 // Health check
 app.get('/health-check', (req, res) => {
