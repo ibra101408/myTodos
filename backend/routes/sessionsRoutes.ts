@@ -14,11 +14,15 @@ router.post(
         // Find the user by email
         const user = await prisma.user.findUnique({
             where: { email: req.body.email },
+
         });
 
         if (!user) {
             return res.status(401).send({ error: 'Invalid email or password' });
         }
+        console.log("req.body.id: ", req.body.id);
+        console.log("req.body.email: ", req.body.email);
+        console.log("user.id : ", user.id);
 
         // Check if the password is correct
         const passwordMatch = await bcrypt.compare(
@@ -29,16 +33,26 @@ router.post(
         if (!passwordMatch) {
             return res.status(401).send({ error: 'Invalid email or password' });
         }
-
-
-        // Create a new session for the user
         const session = await prisma.session.create({
+            data: {
+                userid: user.id,
+                expires: new Date(),
+            }
 
-             data: { userid: user.id, id: uuid() }
+        });
+
+        // Return session
+        res.status(201).json({
+            sessionToken: session.sessionToken
+        })
+        // Create a new session for the user
+        /*const session = await prisma.session.create({
+
+             data: { userid: user.id, id: uuid(), expires: new Date() },
         });
 
 
-        return res.status(201).send({ sessionId: session.id });
+        return res.status(201).send({ sessionId: session.id });*/
     })
 );
 

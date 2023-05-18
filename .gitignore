@@ -30,3 +30,4 @@ node_modules/
 /cypress/downloads/
 /cypress/screenshots/
 
+/certs/

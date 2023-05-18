@@ -1,3 +1,6 @@
+//const http: = require('http:');
+//const fs = require('fs');
+
 import express, {Express, NextFunction, Request, Response} from 'express';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
@@ -13,8 +16,13 @@ dotenv.config();
 const port: Number = Number(process.env.PORT) || 3000;
 const app: Express = express();
 const swaggerDocument: Object = YAML.load('./swagger.yaml');
-const { app: appWithWs, getWss } = expressWs(app);
+//const { app: appWithWs, getWss } = expressWs(app);
 
+/*
+const options = {
+    key: fs.readFileSync('../../todos/certs/myCA.pem'),
+    cert: fs.readFileSync('../../todos/certs/myCA.pem')
+};*/
 
 // Middleware
 app.use(express.json());
@@ -39,5 +47,11 @@ app.get('/health-check', (req, res) => {
     res.status(200).send('OK');
 });
 
+
 // Start the server
 app.listen(port, () => console.log(`Running at http://localhost:${port} and docs at http://localhost:${port}/docs`));
+
+//const http:Server = http:.createServer(options, app);
+
+// Start the server
+//http:Server.listen(port, () => console.log(`Running at https://localhost:${port} and docs at https://localhost:${port}/docs`));

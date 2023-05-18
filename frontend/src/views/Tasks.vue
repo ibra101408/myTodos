@@ -25,12 +25,12 @@ const instance = axios.create({
   baseURL: API_URL,
 });
 
-const socket = new WebSocket('ws://localhost:3000');
+//const socket = new WebSocket('wss://localhost:3000');
 
 // handle message received from server
-socket.onmessage = function (event){
-  console.log(event.data);
-};
+//socket.onmessage = function (event){
+ // console.log(event.data);
+//};
 
 
 export default {

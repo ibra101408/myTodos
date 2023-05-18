@@ -14,16 +14,23 @@ model User {
   id       Int     @id @default(autoincrement())
   email    String? @unique
   password String?
+  sessions Session[]
+  tasks    Task[]
+
+  @@unique([id, email])
 }
 
 model Session {
-  id        String     @id
-  userid    Int
+  sessionToken  String     @id @default(uuid())
+  userid        Int
+  expires       DateTime
+  user User @relation(fields: [userid], references: [id])
 }
 
 model Task {
   id        Int     @id @default(autoincrement())
   title     String
   completed Boolean @default(false)
-
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
 }

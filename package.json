@@ -13,7 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0"
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "@types/ws": "^8.5.4"
   },
   "dependencies": {
     "@vue/composition-api": "^1.7.1",
@@ -21,6 +22,10 @@
     "mock-aws-s3": "^4.0.2",
     "nock": "^13.3.0",
     "pinia": "^2.0.33",
-    "ts-node": "^10.9.1"
+    "socket.io": "^4.6.1",
+    "socket.io-client": "^4.6.1",
+    "sqlite3": "^5.1.4",
+    "ts-node": "^10.9.1",
+    "ws": "^8.13.0"
   }
 }

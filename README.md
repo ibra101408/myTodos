@@ -15,7 +15,7 @@ Newspaper is a simple express app that allows you to create a simple blog.
 
 ### Documentation
 
-The API documentation is at [http://localhost:3000/docs](http://localhost:3000/docs)
+The API documentation is at [https://localhost:3000/docs](https://localhost:3000/docs)
 
 ### Tests
 

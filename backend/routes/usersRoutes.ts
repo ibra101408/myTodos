@@ -44,6 +44,13 @@ router.post(
             },
         });
 
+
+        const user_id  = user.id;
+        module.exports = {
+            user_id,
+        };
+        console.log("userID: ", user_id);
+
         // Copy the user object
         const userCopy: any = {...user};
 
@@ -52,6 +59,8 @@ router.post(
 
         // Return user
         return res.status(201).send(userCopy);
+
+
     })
 );
 
