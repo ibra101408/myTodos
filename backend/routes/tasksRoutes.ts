@@ -10,9 +10,10 @@ const router = express.Router();
 // Get all tasks
 router.get('/', async (req: Request, res: Response) => {
     try {
+                    // Miks ei tööta? //
+       // const userId = req.session.userid; // Access the user ID from the session
+        //console.log("userId: ", userId);
 
-        const userId = req.session.userid; // Access the user ID from the session
-        console.log("userId: ", userId);
         /* const user = await prisma.user.findUnique({
              where: { email: req.body.email },
 
@@ -23,12 +24,7 @@ router.get('/', async (req: Request, res: Response) => {
          console.log("user id is -- ", user.id);*/
         const tasks = await prisma.task.findMany();
         //const users = await prisma.user.findMany();
-        const users = await prisma.user.findUnique({
-            where: {
-                id: 1
-            }
-        });
-        console.log(users);
+
         res.json(tasks);
 
     } catch (e) {
@@ -59,7 +55,7 @@ router.get('/', async (req: Request, res: Response) => {
                 data: {
                     title,
                     completed: false,
-                    userId
+                    userId: 1
                 },
                 //  include: { user: true },
             });
