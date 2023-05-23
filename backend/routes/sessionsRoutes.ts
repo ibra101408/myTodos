@@ -13,12 +13,12 @@ router.post(
     handleErrors(async (req: Request, res: Response) => {
         // Find the user by email
         const user = await prisma.user.findUnique({
-            where: { email: req.body.email },
+            where: {email: req.body.email},
 
         });
 
         if (!user) {
-            return res.status(401).send({ error: 'Invalid email or password' });
+            return res.status(401).send({error: 'Invalid email or password'});
         }
         console.log("req.body.id: ", req.body.id);
         console.log("req.body.email: ", req.body.email);
@@ -31,28 +31,34 @@ router.post(
         );
 
         if (!passwordMatch) {
-            return res.status(401).send({ error: 'Invalid email or password' });
+            return res.status(401).send({error: 'Invalid email or password'});
         }
         const session = await prisma.session.create({
             data: {
                 userid: user.id,
                 expires: new Date(),
             }
-
         });
 
         // Return session
         res.status(201).json({
             sessionToken: session.sessionToken
         })
-        // Create a new session for the user
-        /*const session = await prisma.session.create({
+    })
+);
+router.post(
+    '/logout',
+    handleErrors(async (req: Request, res: Response) => {
+        const sessionToken = req.body.sessionToken;
 
-             data: { userid: user.id, id: uuid(), expires: new Date() },
-        });
+        if (!sessionToken) {
+            return res.status(401).send({ error: 'Invalid sessionID' });
+        }
 
+        // Delete the session from the database
+        await prisma.session.delete({ where: { sessionToken: sessionToken } });
 
-        return res.status(201).send({ sessionId: session.id });*/
+        return res.status(200).send({ message: 'You have been logged out' });
     })
 );
 

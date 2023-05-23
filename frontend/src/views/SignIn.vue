@@ -24,7 +24,7 @@ export default {
       })
           .then(response => {
             // save session token
-            localStorage.setItem('sessionId', response.sessionId)
+            localStorage.setItem('sessionToken', response.sessionToken)
             /*const store = useStore();
             store.setToken(response.sessionId);*/
 

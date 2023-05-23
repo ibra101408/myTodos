@@ -10,7 +10,7 @@ import usersRoutes from "./routes/usersRoutes";
 import sessionsRoutes from "./routes/sessionsRoutes";
 import tasksRoutes from "./routes/tasksRoutes";
 import cors from 'cors';
-import expressWs from 'express-ws';
+//import expressWs from 'express-ws';
 
 dotenv.config();
 const port: Number = Number(process.env.PORT) || 3000;
@@ -25,10 +25,10 @@ const options = {
 };*/
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use(cors());
 
 // Error handling
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
